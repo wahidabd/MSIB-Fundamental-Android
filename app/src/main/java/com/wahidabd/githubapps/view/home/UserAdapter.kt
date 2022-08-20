@@ -40,6 +40,10 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
             with(binding){
                 tvUsername.text = data.login
                 imgAvatar.setImage(data.avatar_url)
+
+                btnDetail.setOnClickListener {
+                    listener?.let { listener(data.login) }
+                }
             }
         }
     }

@@ -10,4 +10,7 @@ data class User(
     val followers: Int? = null,
     val following: Int? = null,
     val blog: String? = null,
+    val company: String? = null,
+    val location: String? = null,
+    val bio: String? = null
 )

@@ -1,78 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/dark_blue"
     tools:context=".view.home.HomeFragment">
 
     <TextView
+        android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="36sp"
-        android:textColor="@color/white"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="46dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/poppins_bold"
         android:text="@string/welcome"
-        android:layout_marginHorizontal="30dp"/>
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="52dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/bg_search"
         android:gravity="center"
         android:paddingHorizontal="20dp"
-        android:layout_marginHorizontal="30dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_welcome">
 
         <EditText
             android:id="@+id/edt_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/search_hint"
-            android:textColor="@color/gray_dark"
-            android:textSize="14sp"
-            android:fontFamily="@font/poppins"
+            android:autofillHints="no"
             android:background="@null"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/search_hint"
             android:inputType="text"
             android:maxLines="1"
-            android:autofillHints="no"
-            android:layout_marginHorizontal="30dp"/>
+            android:textColor="@color/dark_blue"
+            android:textColorHint="@color/gray_dark"
+            android:textSize="14sp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:tint="@color/gray_dark"
-            android:src="@drawable/ic_baseline_search_24"
-            android:contentDescription="@string/image_content_description" />
+            android:id="@+id/img_search"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ripple_round_gray"
+            android:contentDescription="@string/image_content_description"
+            android:padding="6dp"
+            android:src="@drawable/ic_search"
+            app:tint="@color/gray_dark" />
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_list_users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="@string/list_of_users"
-        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
         android:textSize="24sp"
-        android:layout_marginHorizontal="30dp"
-        android:textColor="@color/white"/>
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="10dp"
         android:paddingTop="16dp"
-        tools:listitem="@layout/item_user"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_users"
+        tools:listitem="@layout/item_user" />
 
-    <include android:id="@+id/loading"
-        layout="@layout/github_loading"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_users">
 
-    <include android:id="@+id/error"
-        layout="@layout/github_error"/>
+        <include
+            android:id="@+id/loading"
+            layout="@layout/github_loading" />
 
-</LinearLayout>
+        <include
+            android:id="@+id/error"
+            layout="@layout/github_error" />
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

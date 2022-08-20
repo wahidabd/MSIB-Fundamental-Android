@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark_blue"
+    android:orientation="vertical"
+    tools:context=".view.detail.DetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="302dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_blue"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="30dp"
+            android:paddingVertical="12sp">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/ripple_round_primary"
+                android:contentDescription="@string/image_content_description"
+                android:padding="4dp"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/back"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/img_follow"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/ripple_round_primary"
+                android:contentDescription="@string/image_content_description"
+                android:padding="4dp"
+                tools:src="@drawable/ic_un_follow" />
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/github_loading" />
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/github_error" />
+
+        <LinearLayout
+            android:id="@+id/linear_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    tools:src="@tools:sample/avatars" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        tools:text="Abd. Wahid" />
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="wahidabd" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="12sp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="Android Developer" />
+
+            <TextView
+                android:id="@+id/tv_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_building"
+                app:drawableTint="@color/white"
+                tools:text="Sepuluh Nopember institute of Technology" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_location"
+                app:drawableTint="@color/white"
+                tools:text="Bangkalan, Madura" />
+
+            <TextView
+                android:id="@+id/tv_blog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_link"
+                app:drawableTint="@color/white"
+                tools:text="dicoding.com" />
+
+            <TextView
+                android:id="@+id/tv_follow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="24dp"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_people"
+                app:drawableTint="@color/white"
+                tools:text="24 followers . 32 following" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:background="@color/dark_blue"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/green_light"
+                app:tabMode="fixed"
+                app:tabPaddingStart="0dp"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                app:tabTextColor="@color/green_light" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

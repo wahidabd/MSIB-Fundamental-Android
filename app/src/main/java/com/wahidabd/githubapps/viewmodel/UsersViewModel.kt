@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wahidabd.githubapps.core.Resource
 import com.wahidabd.githubapps.core.Status
 import com.wahidabd.githubapps.data.model.User
 import com.wahidabd.githubapps.data.repository.UserRepository
@@ -26,11 +25,14 @@ class UsersViewModel @Inject constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    private val _list = MutableLiveData<List<User>?>()
-    val list: LiveData<List<User>?> = _list
+    private val _list = MutableLiveData<List<User>>()
+    val list: LiveData<List<User>> = _list
 
-    fun list(){
-        repo.users().onEach { res ->
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
+
+    fun user(username: String){
+        repo.detail(username).onEach { res ->
             when (res.status) {
                 Status.LOADING -> _loading.postValue(true)
                 Status.ERROR -> {
@@ -39,10 +41,46 @@ class UsersViewModel @Inject constructor(
                 }
                 Status.SUCCESS -> {
                     _loading.postValue(false)
-                    _list.postValue(res.data)
+                    _user.postValue(res.data!!)
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun list(){
+        viewModelScope.launch(Dispatchers.IO){
+            repo.users().collect { res ->
+                when (res.status) {
+                    Status.LOADING -> _loading.postValue(true)
+                    Status.ERROR -> {
+                        _loading.postValue(false)
+                        _error.postValue(res.message.toString())
+                    }
+                    Status.SUCCESS -> {
+                        _loading.postValue(false)
+                        _list.postValue(res.data!!)
+                    }
+                }
+            }
+        }
+    }
+
+    fun search(q: String){
+        viewModelScope.launch(Dispatchers.IO){
+            repo.search(q).collect{ res ->
+                when (res.status) {
+                    Status.LOADING -> _loading.postValue(true)
+                    Status.ERROR -> {
+                        _loading.postValue(false)
+                        _error.postValue(res.message.toString())
+                    }
+                    Status.SUCCESS -> {
+                        _loading.postValue(false)
+                        _list.postValue(res.data?.items)
+                    }
+                }
+            }
+        }
     }
 
 }

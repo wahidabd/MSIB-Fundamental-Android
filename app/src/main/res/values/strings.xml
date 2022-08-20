@@ -17,4 +17,7 @@
     <string name="list_of_users">List of Users</string>
     <string name="detail">Detail</string>
     <string name="data_not_found">Data not found!</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="back">Back</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.wahidabd.githubapps.view.home
+package com.wahidabd.githubapps.view.detail.follow
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,24 +9,32 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import com.wahidabd.githubapps.databinding.FragmentHomeBinding
-import com.wahidabd.githubapps.viewmodel.UsersViewModel
+import com.wahidabd.githubapps.databinding.FragmentFollowingBinding
+import com.wahidabd.githubapps.view.detail.DetailFragmentDirections
+import com.wahidabd.githubapps.view.home.UserAdapter
+import com.wahidabd.githubapps.viewmodel.FollowViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class FollowingFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: UsersViewModel by viewModels()
+    private val viewModel: FollowViewModel by viewModels()
     private lateinit var mAdapter: UserAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+    private var username: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            username = it.getString(USERNAME)
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentFollowingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,25 +49,15 @@ class HomeFragment : Fragment() {
         }
 
         mAdapter.setOnItemClick {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
+            val action = DetailFragmentDirections.actionDetailFragmentSelf(it)
             findNavController().navigate(action)
         }
 
-        binding.imgSearch.setOnClickListener {
-            val q = binding.edtSearch.text.toString().trim()
-            search(q)
-        }
-
-        viewModel.list()
-        observableViewModel()
-    }
-
-    private fun search(q: String){
-        viewModel.search(q)
         observableViewModel()
     }
 
     private fun observableViewModel() {
+        viewModel.following(username.toString())
         viewModel.loading.observe(viewLifecycleOwner){
             if (it) binding.loading.loading.visibility = View.VISIBLE
             else binding.loading.loading.visibility = View.GONE
@@ -71,5 +69,15 @@ class HomeFragment : Fragment() {
             if (res.isEmpty()) binding.error.error.visibility = View.VISIBLE
             else mAdapter.setList(res)
         }
+    }
+
+    companion object {
+        fun newInstance(username: String) =
+            FollowingFragment().apply {
+                arguments = Bundle().apply {
+                    putString(USERNAME, username)
+                }
+            }
+        private const val USERNAME = "USERNAME"
     }
 }

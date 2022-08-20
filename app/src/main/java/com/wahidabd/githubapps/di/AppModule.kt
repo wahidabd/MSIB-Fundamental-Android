@@ -26,7 +26,7 @@ object AppModule {
         Interceptor{
             val newReq = it.request()
                 .newBuilder()
-                .addHeader("Authorization", "token ${BuildConfig.API_KEY}")
+                .addHeader("Authorization", "token${BuildConfig.API_KEY}")
                 .build()
             it.proceed(newReq)
         }
