@@ -54,6 +54,7 @@
                 android:background="@drawable/ripple_round_primary"
                 android:contentDescription="@string/image_content_description"
                 android:padding="4dp"
+                app:tint="@color/green_light"
                 tools:src="@drawable/ic_un_follow" />
 
         </LinearLayout>

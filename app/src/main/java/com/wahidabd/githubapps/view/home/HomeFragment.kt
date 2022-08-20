@@ -61,8 +61,13 @@ class HomeFragment : Fragment() {
 
     private fun observableViewModel() {
         viewModel.loading.observe(viewLifecycleOwner){
-            if (it) binding.loading.loading.visibility = View.VISIBLE
-            else binding.loading.loading.visibility = View.GONE
+            if (it) {
+                binding.loading.loading.visibility = View.VISIBLE
+                binding.rvUser.visibility = View.GONE
+            } else {
+                binding.loading.loading.visibility = View.GONE
+                binding.rvUser.visibility = View.VISIBLE
+            }
         }
         viewModel.error.observe(viewLifecycleOwner){
             binding.error.error.visibility = View.VISIBLE
