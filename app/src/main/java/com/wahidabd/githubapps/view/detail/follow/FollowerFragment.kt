@@ -67,8 +67,10 @@ class FollowerFragment : Fragment() {
             binding.error.error.visibility = View.VISIBLE
         }
         viewModel.list.observe(viewLifecycleOwner){res ->
-            if (res.isEmpty()) binding.error.error.visibility = View.VISIBLE
-            else mAdapter.setList(res)
+            if (res != null) {
+                if (res.isEmpty()) binding.error.error.visibility = View.VISIBLE
+                else mAdapter.setList(res)
+            }
         }
     }
 

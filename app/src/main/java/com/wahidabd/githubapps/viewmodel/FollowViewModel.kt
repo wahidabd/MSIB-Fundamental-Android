@@ -21,8 +21,8 @@ class FollowViewModel @Inject constructor(private val repo: UserRepository) : Vi
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    private val _list = MutableLiveData<List<User>>()
-    val list: LiveData<List<User>> = _list
+    private val _list = MutableLiveData<List<User>?>()
+    val list: LiveData<List<User>?> = _list
 
     fun followers(username: String){
         repo.followers(username).onEach {res ->
@@ -34,7 +34,7 @@ class FollowViewModel @Inject constructor(private val repo: UserRepository) : Vi
                 }
                 Status.SUCCESS -> {
                     _loading.postValue(false)
-                    _list.postValue(res.data!!)
+                    _list.postValue(res.data)
                 }
             }
         }.launchIn(viewModelScope)
@@ -50,7 +50,7 @@ class FollowViewModel @Inject constructor(private val repo: UserRepository) : Vi
                 }
                 Status.SUCCESS -> {
                     _loading.postValue(false)
-                    _list.postValue(res.data!!)
+                    _list.postValue(res.data)
                 }
             }
         }.launchIn(viewModelScope)

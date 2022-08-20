@@ -10,12 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wahidabd.githubapps.R
+import com.wahidabd.githubapps.core.currentDate
 import com.wahidabd.githubapps.core.mySetText
 import com.wahidabd.githubapps.core.setImage
+import com.wahidabd.githubapps.data.model.FavoriteData
 import com.wahidabd.githubapps.data.model.User
 import com.wahidabd.githubapps.databinding.FragmentDetailBinding
+import com.wahidabd.githubapps.viewmodel.RoomViewModel
 import com.wahidabd.githubapps.viewmodel.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +30,10 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: UsersViewModel by viewModels()
+    private val roomViewModel: RoomViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
+
+    private var favoriteData = FavoriteData("")
     private var status = false
 
     override fun onCreateView(
@@ -42,8 +49,13 @@ class DetailFragment : Fragment() {
 
         binding.imgBack.setOnClickListener { findNavController().navigateUp() }
         binding.imgFollow.setOnClickListener {
-            status = !status
-            follow()
+            if (status){
+                deleteFavorite(args.login)
+                Snackbar.make(it, "User deleted!", Snackbar.LENGTH_SHORT).show()
+            }else{
+                insertFavorite(favoriteData)
+                Snackbar.make(it, "User added!", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         val pager = FollowViewPagerAdapter(requireParentFragment(), args.login)
@@ -54,7 +66,7 @@ class DetailFragment : Fragment() {
             title.text = tab[position]
         }.attach()
 
-        follow()
+        checkFavorite(args.login)
         observableViewModel()
     }
 
@@ -90,18 +102,40 @@ class DetailFragment : Fragment() {
             tvBlog.mySetText(data.blog)
             tvFollow.text = "${data.followers} followers \u2022 ${data.following} following"
 
+            favoriteData = FavoriteData(
+                login = args.login,
+                name = data.name,
+                avatar = data.avatar_url,
+                updated_at = currentDate()
+            )
         }
     }
 
-    private fun follow(){
-        if (status) {
-            binding.imgFollow.setImageDrawable(
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_follow)
-            )
-        }else{
-            binding.imgFollow.setImageDrawable(
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_un_follow)
-            )
+    private fun insertFavorite(data: FavoriteData){
+        roomViewModel.insert(data)
+        status = true
+        checkFavorite(data.login)
+    }
+
+    private fun deleteFavorite(login: String){
+        roomViewModel.delete(login)
+        status = false
+        checkFavorite(login)
+    }
+
+    private fun checkFavorite(login: String){
+        roomViewModel.detail(login)
+        roomViewModel.favorite.observe(viewLifecycleOwner){ res ->
+            status = res != null
+            if (status) {
+                binding.imgFollow.setImageDrawable(
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_follow)
+                )
+            }else{
+                binding.imgFollow.setImageDrawable(
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_un_follow)
+                )
+            }
         }
     }
 }
