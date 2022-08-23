@@ -3,6 +3,7 @@ package com.wahidabd.githubapps.di
 import android.content.Context
 import com.wahidabd.githubapps.BuildConfig
 import com.wahidabd.githubapps.core.SafeCall
+import com.wahidabd.githubapps.core.SettingPreference
 import com.wahidabd.githubapps.data.repository.RoomRepository
 import com.wahidabd.githubapps.data.repository.UserRepository
 import com.wahidabd.githubapps.data.service.GithubService
@@ -31,7 +32,6 @@ object AppModule {
         Interceptor{
             val newReq = it.request()
                 .newBuilder()
-                .addHeader("Authorization", "token${BuildConfig.API_KEY}")
                 .build()
             it.proceed(newReq)
         }
@@ -87,4 +87,10 @@ object AppModule {
     @Singleton
     fun provideRoomRepository(source: RoomDataSource): RoomRepository =
         RoomRepository(source)
+
+    @Provides
+    @Singleton
+    fun provideSettingDataStore(@ApplicationContext context: Context): SettingPreference =
+        SettingPreference.getInstance(context)
+
 }

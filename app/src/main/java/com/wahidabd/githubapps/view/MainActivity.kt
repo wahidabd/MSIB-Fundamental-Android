@@ -31,6 +31,6 @@ class MainActivity : AppCompatActivity() {
                 else -> binding.bottomNav.visibility = View.GONE
             }
         }
-
     }
+
 }

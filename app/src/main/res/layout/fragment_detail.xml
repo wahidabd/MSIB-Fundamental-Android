@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/dark_blue"
+    android:background="@color/dark_blue_white"
     android:orientation="vertical"
     tools:context=".view.detail.DetailFragment">
 
@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_blue"
+            android:background="@color/dark_blue_white"
             android:elevation="4dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -35,6 +35,7 @@
                 android:background="@drawable/ripple_round_primary"
                 android:contentDescription="@string/image_content_description"
                 android:padding="4dp"
+                app:tint="@color/white_black_dark"
                 android:src="@drawable/ic_arrow_back" />
 
             <TextView
@@ -44,7 +45,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/back"
-                android:textColor="@color/white"
+                android:textColor="@color/white_black_dark"
                 android:textSize="18sp" />
 
             <ImageView
@@ -99,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/white_black_dark"
                         android:textSize="18sp"
                         tools:text="Abd. Wahid" />
 
@@ -108,7 +109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/white"
+                        android:textColor="@color/white_black_dark"
                         android:textSize="14sp"
                         tools:text="wahidabd" />
 
@@ -123,7 +124,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="12sp"
                 android:fontFamily="@font/poppins"
-                android:textColor="@color/white"
+                android:textColor="@color/white_black_dark"
                 android:textSize="14sp"
                 tools:text="Android Developer" />
 
@@ -137,10 +138,10 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins"
                 android:maxLines="1"
-                android:textColor="@color/white"
+                android:textColor="@color/white_black_dark"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/ic_building"
-                app:drawableTint="@color/white"
+                app:drawableTint="@color/white_black_dark"
                 tools:text="Sepuluh Nopember institute of Technology" />
 
             <TextView
@@ -153,10 +154,10 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins"
                 android:maxLines="1"
-                android:textColor="@color/white"
+                android:textColor="@color/white_black_dark"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/ic_location"
-                app:drawableTint="@color/white"
+                app:drawableTint="@color/white_black_dark"
                 tools:text="Bangkalan, Madura" />
 
             <TextView
@@ -169,10 +170,10 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins_medium"
                 android:maxLines="1"
-                android:textColor="@color/white"
+                android:textColor="@color/white_black_dark"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/ic_link"
-                app:drawableTint="@color/white"
+                app:drawableTint="@color/white_black_dark"
                 tools:text="dicoding.com" />
 
             <TextView
@@ -186,10 +187,10 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins"
                 android:maxLines="1"
-                android:textColor="@color/white"
+                android:textColor="@color/white_black_dark"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/ic_people"
-                app:drawableTint="@color/white"
+                app:drawableTint="@color/white_black_dark"
                 tools:text="24 followers . 32 following" />
 
             <com.google.android.material.tabs.TabLayout
@@ -197,7 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
-                android:background="@color/dark_blue"
+                android:background="@color/dark_blue_white"
                 app:tabGravity="fill"
                 app:tabIndicatorColor="@color/green_light"
                 app:tabMode="fixed"
